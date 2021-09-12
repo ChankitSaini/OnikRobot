@@ -16,18 +16,18 @@ from pyrogram.errors import FloodWait, MessageNotModified
 from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
 from youtube_search import YoutubeSearch
 
-from config import BOT_USERNAME
+from config import Onik
 from helpers.filters import command
 from helpers.decorators import humanbytes
 
 
-@Client.on_message(command(["song", f"song@{BOT_USERNAME}"]) & ~filters.channel)
+@Client.on_message(command(["song", f"song@{Onik.BOT_USERNAME}"]) & ~filters.channel)
 def song(_, message):
     query = ""
     for i in message.command[1:]:
         query += " " + str(i)
     print(query)
-    m = message.reply("🔎 Finding song...")
+    m = message.reply("🔎 finding song...")
     ydl_ops = {"format": "bestaudio[ext=m4a]"}
     try:
         results = YoutubeSearch(query, max_results=1).to_dict()
@@ -40,16 +40,16 @@ def song(_, message):
         duration = results[0]["duration"]
 
     except Exception as e:
-        m.edit("❌ Song not found.\n\nPlease give a valid song name.")
+        m.edit("❌ song not found.\n\nplease give a valid song name.")
         print(str(e))
         return
-    m.edit("📥 Downloading...")
+    m.edit("📥 downloading...")
     try:
         with youtube_dl.YoutubeDL(ydl_ops) as ydl:
             info_dict = ydl.extract_info(link, download=False)
             audio_file = ydl.prepare_filename(info_dict)
             ydl.process_info(info_dict)
-        rep = f"**🎧 By @{BOT_USERNAME}**"
+        rep = f"**🎧 By @{Onik.BOT_USERNAME}**"
         secmul, dur, dur_arr = 1, 0, duration.split(":")
         for i in range(len(dur_arr) - 1, -1, -1):
             dur += int(float(dur_arr[i])) * secmul
@@ -224,7 +224,7 @@ def time_to_seconds(times):
     return sum(int(x) * 60 ** i for i, x in enumerate(reversed(stringt.split(":"))))
 
 
-@Client.on_message(command(["vsong", f"vsong@{BOT_USERNAME}"]) & filters.group & ~filters.edited)
+@Client.on_message(command(["vsong", f"vsong@{Onik.BOT_USERNAME}"]) & filters.group & ~filters.edited)
 async def vsong(_, message: Message):
     query = ''
     for i in message.command[1:]:
@@ -258,16 +258,16 @@ async def vsong(_, message: Message):
         except Exception as e:
             print(e)
             await k.edit(
-                '❌ **Video not found, please give a valid video name.\n\n» if you think this is an error report to '
+                '❌ **video not found, please give a valid video name.\n\n» if you think this is an error report to '
                 '@NeuroticBotSupport**')
             return
     except Exception as e:
         await k.edit(
-            "💡 **Please give a video name too you want to download.**\n\n» for example: `/vsong faded`"
+            "💡 **please give a video name too you want to download.**\n\n» for example: `/vsong runaway`"
         )
         print(str(e))
         return
-    await k.edit("📥 **Downloading file...**")
+    await k.edit("📥 **downloading file...**")
     try:
         with youtube_dl.YoutubeDL(ydl_ops) as ydl:
             info_dict = ydl.extract_info(link, download=False)
@@ -276,12 +276,12 @@ async def vsong(_, message: Message):
         caption = f"🏷 Name: {title}\n💡 Views: `{views}`\n🎧 Request by: {message.from_user.mention()}\n\n⚡ " \
                   f"__Powered by @NeuroticAssociation__ "
         buttons = InlineKeyboardMarkup([[InlineKeyboardButton("🗑 Close", callback_data="cls")]])
-        await k.edit("📤 **Uploading file...**")
+        await k.edit("📤 **uploading file...**")
         await message.reply_video(video_file, caption=caption, duration=duration, thumb=thumb_name,
                                   reply_markup=buttons, supports_streaming=True)
         await k.delete()
     except Exception as e:
-        await k.edit(f'❌ **Something went wrong !** \n`{e}`')
+        await k.edit(f'❌ **something went wrong !** \n`{e}`')
         pass
     try:
         os.remove(video_file)
