@@ -11,7 +11,7 @@ from pytgcalls.types.input_stream import VideoParameters
 
 from pyrogram import Client, filters
 from pyrogram.types import Message
-from config import API_ID, API_HASH, SESSION_NAME, BOT_USERNAME
+from config import Onik
 from helpers.decorators import authorized_users_only
 from helpers.filters import command
 from youtube_dl import YoutubeDL
@@ -19,7 +19,7 @@ from youtube_dl.utils import ExtractorError
 
 SIGINT: int = 2
 
-app = Client(SESSION_NAME, API_ID, API_HASH)
+app = Client(Onik.SESSION_NAME, Onik.API_ID, Onik.API_HASH)
 call_py = PyTgCalls(app)
 FFMPEG_PROCESS = {}
 
@@ -44,7 +44,7 @@ def youtube(url: str):
         return
 
 
-@Client.on_message(command(["vstream", f"vstream@{BOT_USERNAME}"]) & filters.group & ~filters.edited)
+@Client.on_message(command(["vstream", f"vstream@{Onik.BOT_USERNAME}"]) & filters.group & ~filters.edited)
 @authorized_users_only
 async def startvideo(client, m: Message):
     replied = m.reply_to_message
@@ -139,7 +139,7 @@ async def startvideo(client, m: Message):
         await m.reply("💭 Please reply to video or video file to stream")
 
 
-@Client.on_message(command(["vend", f"vend@{BOT_USERNAME}"]) & filters.group & ~filters.edited)
+@Client.on_message(command(["vend", f"vend@{Onik.BOT_USERNAME}"]) & filters.group & ~filters.edited)
 @authorized_users_only
 async def stopvideo(client, m: Message):
     chat_id = m.chat.id
@@ -152,6 +152,6 @@ async def stopvideo(client, m: Message):
             except Exception as e:
                 print(e)
         await call_py.leave_group_call(chat_id)
-        await m.reply("✅ **Disconnected from vc !**")
+        await m.reply("✅ **Disconnected from Video Chat!**")
     except Exception as e:
         await m.reply(f"🚫 **Error** | `{e}`")
