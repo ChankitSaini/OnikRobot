@@ -40,7 +40,7 @@ async def start(_, m: Message):
             reply_markup=InlineKeyboardMarkup(
                 [[
                     InlineKeyboardButton(
-                        "➕ Add me to your Group ➕", url=f"https://t.me/{Onik.BOT_USERNAME}?startgroup=true")
+                        "📚 All Command List", callback_data="cblist")
                 ], [
                     InlineKeyboardButton(
                         "❔ HOW TO USE THIS BOT", callback_data="cbguide")
@@ -55,9 +55,9 @@ async def start(_, m: Message):
                 ], [
                     InlineKeyboardButton(
                         "👩🏻‍💻 Developer", url="https://t.me/NeuroticAssociation")
-                ], [
+                ],[
                     InlineKeyboardButton(
-                        "📚 All Command List", callback_data="cblist")
+                        "➕ Add me to your Group ➕", url=f"https://t.me/{Onik.BOT_USERNAME}?startgroup=true")
                 ]]
             ))
     else:
@@ -85,18 +85,11 @@ async def alive(_, m: Message):
     await m.reply_text(
         f"""✅ **Bot is running**\n<b>💠 **uptime:**</b> `{uptime}`""",
         reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton(
-                        "✨ Group", url=f"https://t.me/NeuroticBotSupport"
-                    ),
-                    InlineKeyboardButton(
-                        "📣 Channel", url=f"https://t.me/NeuroticBots"
-                    )
-                ]
-            ]
-        )
-    )
+            [[
+              InlineKeyboardButton("✨ Group", url=f"https://t.me/NeuroticBotSupport"),
+              InlineKeyboardButton("📣 Channel", url=f"https://t.me/NeuroticBots")
+            ]]
+        ))
 
 
 @Client.on_message(command(["ping", f"ping@{Onik.BOT_USERNAME}"]) & ~filters.edited)
