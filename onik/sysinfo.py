@@ -5,15 +5,14 @@ import uuid
 
 import psutil
 from pyrogram import Client, filters
-
-from config import BOT_USERNAME
+from config import Onik
 from helpers.decorators import sudo_users_only, humanbytes
 from helpers.filters import command
 
 
 # FETCH SYSINFO
 
-@Client.on_message(command(["sysinfo", f"sysinfo@{BOT_USERNAME}"]) & ~filters.edited)
+@Client.on_message(command(["sysinfo", f"sysinfo@{Onik.BOT_USERNAME}"]) & ~filters.edited)
 @sudo_users_only
 async def give_sysinfo(client, message):
     splatform = platform.system()
