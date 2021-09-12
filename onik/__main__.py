@@ -1,14 +1,14 @@
 import asyncio
 from pyrogram import Client, idle
-from config import API_ID, API_HASH, BOT_TOKEN
+from config import Onik 
 from onik.videoplayer import app
 from onik.videoplayer import call_py
 
 bot = Client(
     ":memory:",
-    API_ID,
-    API_HASH,
-    bot_token=BOT_TOKEN,
+    Onik.API_ID,
+    Onik.API_HASH,
+    bot_token=Veez.BOT_TOKEN,
     plugins=dict(root="onik"),
 )
 
