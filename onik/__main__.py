@@ -8,7 +8,7 @@ bot = Client(
     ":memory:",
     Onik.API_ID,
     Onik.API_HASH,
-    bot_token=Veez.BOT_TOKEN,
+    bot_token=Onik.BOT_TOKEN,
     plugins=dict(root="onik"),
 )
 
