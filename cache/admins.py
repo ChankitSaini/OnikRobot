@@ -1,5 +1,5 @@
 from typing import Dict, List
-from config import Veez
+from config import Onik
 
 
 admins: Dict[int, List[int]] = {}
