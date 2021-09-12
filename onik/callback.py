@@ -1,7 +1,7 @@
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 
-from config import ASSISTANT_USERNAME, BOT_NAME
+from config import Onik
 
 @Client.on_callback_query(filters.regex("cbguide"))
 async def cbguide(_, query: CallbackQuery):
@@ -10,7 +10,7 @@ async def cbguide(_, query: CallbackQuery):
 
 1.) First, add me to your group.
 2.) Then promote me as admin and give all permissions except anonymous admin.
-3.) Add @{ASSISTANT_USERNAME} to your group.
+3.) Add @{Onik.ASSISTANT_USERNAME} to your group.
 4.) Turn on the voice chat first before start to stream video.
 5.) Type /vstream (reply to video) to start streaming.
 6.) Type /vstop to end the video streaming.
@@ -30,10 +30,13 @@ async def cbguide(_, query: CallbackQuery):
 @Client.on_callback_query(filters.regex("cbstart"))
 async def cbstart(_, query: CallbackQuery):
     await query.edit_message_text(
-        f"✨ **Hello there, I'm {BOT_NAME}.**\n\n💭 **I was created to stream videos in group "
+        f"✨ **Hello there, I'm {Onik.BOT_NAME}.**\n\n💭 **I was created to stream videos in group "
         f"video chats easily.**\n\n❔ **To find out how to use me, please press the help button below** 👇🏻",
         reply_markup=InlineKeyboardMarkup(
             [[
+                InlineKeyboardButton(
+                    "📚 All Command List", callback_data="cblist")
+            ], [
                 InlineKeyboardButton(
                     "❔ HOW TO USE THIS BOT", callback_data="cbguide")
             ], [
@@ -47,9 +50,6 @@ async def cbstart(_, query: CallbackQuery):
             ], [
                 InlineKeyboardButton(
                     "👩🏻‍💻 Developer", url="https://t.me/NeuroticAssociation")
-            ], [
-                InlineKeyboardButton(
-                    "📚 All Command List", callback_data="cblist")
             ]]
         ))
 
@@ -69,7 +69,6 @@ Client Library and Framework in Pure Python for Users and Bots.__
 🤵🏻 » [Chankit Saini](https://github.com/NeuroticCoders) - Owner
 👩🏻‍✈️ » [Levina Shavila](https://github.com/levina-lab) - Dev
 🤵🏻 » [Sammy-XD](https://github.com/Sammy-XD) - Dev
-👩🏻‍✈️ » [Achu Biju](https://github.com/Achu2234) - Dev
 
 __This bot licensed under MIT License__""",
         reply_markup=InlineKeyboardMarkup(
