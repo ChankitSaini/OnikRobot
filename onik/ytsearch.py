@@ -3,8 +3,7 @@ import logging
 from pyrogram import Client as app
 from pyrogram.types import Message
 from youtube_search import YoutubeSearch
-
-from config import BOT_USERNAME
+from config import Onik
 from helpers.filters import command
 
 # logging
@@ -13,9 +12,9 @@ logger = logging.getLogger(__name__)
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
 
 
-@app.on_message(command(["search", f"search@{BOT_USERNAME}"]))
+@app.on_message(command(["search", f"search@{Onik.BOT_USERNAME}"]))
 async def ytsearch(_, message: Message):
-    m = await message.reply_text("🔎 **Searching for your song...**")
+    m = await message.reply_text("🔎 **Searching...**")
     try:
         if len(message.command) < 2:
             await message.reply_text("`/search` needs an argument!")
