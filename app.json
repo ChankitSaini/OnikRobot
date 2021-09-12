@@ -1,5 +1,5 @@
 {
-    "name": "Onik Robot",
+    "name": "OnikRobot",
     "description": "Bot to stream video on telegram video chat, powered by pytgcalls and pyrogram",
     "logo": "https://telegra.ph/file/2f00e968ee781d0db54e8.png",
     "keywords": [
@@ -58,5 +58,6 @@
             "quantity": 1,
             "size": "free"
         }
-    }
+    },
+    "stack": "container"
 }
