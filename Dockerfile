@@ -1,12 +1,12 @@
 FROM python:3.9.7-slim-buster
 
-RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y nodejs \
-    npm
-RUN apt-get install npm -y
-RUN apt-get install git curl python3-pip ffmpeg -y
+RUN apt-get update && apt-get upgrade -y  && \
+    apt-get install --no-install-recommends -y nodejs \
+    npm && rm -rf /var/lib/apt/lists/*
+RUN apt-get install --no-install-recommends npm -y
+RUN apt-get install --no-install-recommends git curl python3-pip ffmpeg -y
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
-RUN apt-get install -y nodejs
+RUN apt-get install --no-install-recommends -y nodejs
 RUN npm install -g npm@7.22.0
 RUN npm i -g npm
 
