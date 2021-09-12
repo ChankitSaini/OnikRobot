@@ -49,9 +49,6 @@
         {
             "url": "heroku/python"
         },
-        {
-            "url": "https://elements.heroku.com/buildpacks/jonathanong/heroku-buildpack-ffmpeg-latest"
-        }
     ],
     "formation": {
         "worker": {
